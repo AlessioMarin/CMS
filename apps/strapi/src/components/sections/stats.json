@@ -1,0 +1,27 @@
+
+{
+  "collectionName": "components_sections_stats",
+  "info": {
+    "displayName": "Stats",
+    "description": "Statistics section with numbers and labels"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "utilities.stat-item"
+    },
+    "backgroundColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    }
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "seo": {
+    "metaTitle": "DEV-TEMPLATE-SEO",
+    "metaDescription": "DEV-TEMPLATE-SEO",
+    "metaImageUrl": "DEV-TEMPLATE-SEO",
+    "keywords": "DEV-TEMPLATE-SEO",
+    "metaRobots": "DEV-TEMPLATE-SEO",
+    "applicationName": "DEV-TEMPLATE-SEO",
+    "siteName": "DEV-TEMPLATE-SEO",
+    "email": "DEV-TEMPLATE-SEO",
+    "twitter": {
+      "card": "DEV-TEMPLATE-SEO",
+      "title": "DEV-TEMPLATE-SEO",
+      "description": "DEV-TEMPLATE-SEO",
+      "siteId": "DEV-TEMPLATE-SEO",
+      "creator": "DEV-TEMPLATE-SEO",
+      "creatorId": "DEV-TEMPLATE-SEO",
+      "imageUrl": "DEV-TEMPLATE-SEO"
+    }
+  },
+
+  "general": {
+    "noOptionsAvailable": "Nessuna opzione disponibile",
+    "search": "Cerca",
+    "loading": "Caricamento",
+    "cancel": "Annulla",
+    "close": "Chiudi",
+    "submitForm": "Invia",
+    "saveChanges": "Salva modifiche"
+  },
+
+  "tables": {
+    "previousPage": "Pagina precedente",
+    "nextPage": "Pagina successiva",
+    "lastPage": "Ultima pagina",
+    "firstPage": "Prima pagina",
+    "rowsPerPage": "Righe per pagina",
+    "pageXOfY": "Pagina {x} di {y}",
+    "ascending": "Crescente",
+    "descending": "Decrescente",
+    "noData": "Nessun dato"
+  },
+
+  "navbar": {
+    "account": "Account",
+    "actions": {
+      "profile": "Profilo",
+      "signOut": "Esci",
+      "changePassword": "Cambia password",
+      "signIn": "Accedi"
+    }
+  },
+
+  "comps": {
+    "fileInput": {
+      "label": "Seleziona file",
+      "dragAndDrop": "Aggiungi file trascinandolo o selezionalo cliccando",
+      "validFileTypes": "Il file deve essere in formato {validFileTypes}",
+      "wrongFileType": "Questo tipo di file non è supportato",
+      "selectedFile": "File selezionato: {fileName}",
+      "removeFile": "Rimuovi file"
+    },
+    "datePicker": {
+      "label": "Seleziona data"
+    },
+    "dateRangePicker": {
+      "label": "Seleziona intervallo date"
+    },
+    "themeToggle": {
+      "label": "Cambia tema"
+    },
+    "dialog": {
+      "confirmClose": "Vuoi chiudere la finestra di dialogo? Perderai tutte le modifiche non salvate."
+    }
+  },
+
+  "errors": {
+    "global": {
+      "title": "Si è verificato un errore sconosciuto",
+      "tryAgain": "Riprova",
+      "invalidContent": "Impossibile visualizzare questo contenuto",
+      "somethingWentWrong": "Qualcosa è andato storto 🥺"
+    },
+
+    "notFound": {
+      "title": "Pagina non trovata",
+      "description": "La pagina che stai cercando non è stata trovata.",
+      "solution": "Controlla di aver inserito l'URL corretto o torna alla home page.",
+      "redirect": "Vai alla home page"
+    },
+
+    "forms": {
+      "errorsInForm": "Il modulo contiene errori",
+      "checkFormForErrors": "Verifica se mancano dei valori"
+    },
+
+    "zodValidation": {
+      "invalid_type": "Il tipo previsto è {expected}, ma è stato ricevuto {received}",
+      "invalid_type_received_undefined": "Il campo è obbligatorio",
+      "invalid_literal": "Valore non valido, previsto {expected}",
+
+      "invalid_string": {
+        "regex": "Formato non valido"
+      },
+      "too_small": {
+        "string": {
+          "exact": "La stringa deve contenere esattamente {minimum} caratteri",
+          "inclusive": "La stringa deve contenere almeno {minimum} caratteri",
+          "not_inclusive": "La stringa deve contenere più di {minimum} caratteri"
+        },
+        "number": {
+          "exact": "Il valore deve essere esattamente {minimum}",
+          "inclusive": "Il valore minimo è {minimum}",
+          "not_inclusive": "Il numero deve essere maggiore di {minimum}"
+        }
+      },
+      "too_big": {
+        "string": {
+          "exact": "La stringa deve contenere esattamente {maximum} caratteri",
+          "inclusive": "La stringa deve contenere al massimo {maximum} caratteri",
+          "not_inclusive": "La stringa deve contenere meno di {maximum} caratteri"
+        },
+        "number": {
+          "exact": "Il valore deve essere esattamente {maximum}",
+          "inclusive": "Il valore massimo è {maximum}",
+          "not_inclusive": "Il numero deve essere minore di {maximum}"
+        }
+      },
+      "custom": {
+        "password": "Le password non corrispondono",
+        "passwordWithNumber": "La stringa deve contenere almeno 1 numero",
+        "phoneNumber": "Questo campo deve contenere 9 cifre"
+      }
+    }
+  },
+
+  "contactForm": {
+    "name": "Nome e cognome",
+    "namePlaceholder": "Mario Rossi",
+    "email": "Email",
+    "emailPlaceholder": "mario.rossi@gmail.com",
+    "message": "Messaggio",
+    "gdpr": "Acconsento al trattamento dei dati personali",
+    "submit": "Invia",
+    "success": "Il modulo è stato inviato con successo.",
+    "error": "Impossibile inviare il modulo. Riprova più tardi.",
+    "gdprLink": "Leggi di più sul trattamento dei dati personali"
+  },
+
+  "auth": {
+    "signIn": {
+      "status": {
+        "fail": "Accesso non riuscito",
+        "success": "Accesso avvenuto con successo",
+        "checkCredentials": "Verifica le tue credenziali di accesso"
+      },
+      "errors": {
+        "CredentialsSignin": "Hai inserito credenziali di accesso errate."
+      },
+      "header": "Accedi",
+      "description": "Inserisci i tuoi dati di accesso.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Accedi",
+      "forgotPassword": "Password dimenticata",
+      "createAccount": "Crea un account"
+    },
+
+    "register": {
+      "status": {
+        "fail": "Registrazione non riuscita",
+        "success": "Registrazione avvenuta con successo",
+        "checkCredentials": "Verifica le tue credenziali"
+      },
+      "errors": {
+        "credentials": "Credenziali fornite non corrette",
+        "unexpectedError": "Registrazione non riuscita. Riprova più tardi.",
+        "emailUsernameTaken": "Email già utilizzata. Scegline un'altra."
+      },
+      "header": "Registrazione",
+      "description": "Crea un account per accedere al sistema.",
+      "email": "Indirizzo e-mail",
+      "password": "Crea password",
+      "checkPassword": "Conferma password",
+      "submit": "Crea account",
+      "forgotPassword": "Hai già un account? Accedi.",
+      "checkEmail": "Segui le istruzioni nella tua email per confermare l'indirizzo.",
+      "signInLinkLinkDescription": "Hai già un account?",
+      "signInLink": "Accedi"
+    },
+
+    "changePassword": {
+      "errors": {
+        "invalidCurrentPassword": "La password attuale non corrisponde",
+        "unexpectedError": "Si è verificato un errore imprevisto. Riprova più tardi.",
+        "newPasswordSameAsCurrent": "La nuova password deve essere diversa da quella attuale"
+      },
+      "successfullyChanged": "Password cambiata con successo",
+      "header": "Cambia password",
+      "description": "Scegli una nuova password da utilizzare per l'accesso.",
+      "currentPassword": "Password attuale",
+      "password": "Nuova password",
+      "confirmPassword": "Conferma nuova password",
+      "submit": "Cambia password"
+    },
+
+    "accountActivation": {
+      "successfullySet": "Account attivato con successo. Ora puoi accedere.",
+      "errors": {
+        "Incorrect code provided": "È stato generato un link errato per te. Contatta l'assistenza."
+      },
+      "welcome": "Benvenuto",
+      "activateAccount": "È stato creato un nuovo account con l'email {email}.",
+      "invalidLink": "Questo link non è valido.",
+      "activate": "Attiva account",
+      "header": "Imposta password",
+      "description": "Scegli una password da utilizzare per l'accesso.",
+      "submit": "Attiva account",
+      "password": "Nuova password",
+      "confirmPassword": "Conferma password"
+    },
+
+    "resetPassword": {
+      "successfullySet": "Password cambiata con successo.",
+      "header": "Reimposta password",
+      "description": "Scegli una nuova password da utilizzare per l'accesso.",
+      "submit": "Imposta password",
+      "password": "Nuova password",
+      "confirmPassword": "Conferma password"
+    },
+
+    "forgotPassword": {
+      "passwordChangeEmailSent": "Ti è stata inviata un'email con le istruzioni per reimpostare la password.",
+      "header": "Password dimenticata",
+      "description": "Inserisci l'email che usi di solito per accedere. Ti invieremo le istruzioni per reimpostare la password.",
+      "email": "Email",
+      "submit": "Recupera account"
+    }
+  }
+}

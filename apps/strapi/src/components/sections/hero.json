@@ -1,0 +1,52 @@
+
+{
+  "collectionName": "components_sections_heroes",
+  "info": {
+    "displayName": "Hero",
+    "description": "Hero section with background, title, subtitle and CTA for Atlantic Partners"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "description": {
+      "type": "text"
+    },
+    "ctaButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.link"
+    },
+    "backgroundImage": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.basic-image"
+    },
+    "backgroundColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "textColor": {
+      "type": "enumeration",
+      "enum": ["light", "dark"],
+      "default": "light"
+    },
+    "overlayOpacity": {
+      "type": "decimal",
+      "min": 0,
+      "max": 1,
+      "default": 0.5
+    },
+    "layout": {
+      "type": "enumeration",
+      "enum": ["center", "left", "right"],
+      "default": "center"
+    }
+  }
+}

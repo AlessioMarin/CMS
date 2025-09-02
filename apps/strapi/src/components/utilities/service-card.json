@@ -1,0 +1,38 @@
+
+{
+  "collectionName": "components_utilities_service_cards",
+  "info": {
+    "displayName": "ServiceCard",
+    "description": "Card with icon, title, description and optional CTA"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.basic-image"
+    },
+    "ctaButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.link"
+    },
+    "backgroundColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "borderColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    }
+  }
+}

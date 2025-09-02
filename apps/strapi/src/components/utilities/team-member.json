@@ -1,0 +1,32 @@
+
+{
+  "collectionName": "components_utilities_team_members",
+  "info": {
+    "displayName": "TeamMember",
+    "description": "Individual team member with photo and details"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "position": {
+      "type": "string",
+      "required": true
+    },
+    "bio": {
+      "type": "text"
+    },
+    "photo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.basic-image"
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "utilities.link"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+
+{
+  "collectionName": "components_utilities_contact_infos",
+  "info": {
+    "displayName": "ContactInfo",
+    "description": "Contact information with address, phone, email"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "workingHours": {
+      "type": "string"
+    }
+  }
+}

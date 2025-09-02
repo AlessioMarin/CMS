@@ -1,0 +1,44 @@
+modules = ["nodejs-20", "web", "bash", "postgresql-16"]
+run = "yarn dev"
+
+[nix]
+channel = "stable-25_05"
+
+[deployment]
+run = ["sh", "-c", "yarn dev"]
+
+[[ports]]
+localPort = 1337
+externalPort = 3000
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
+
+[[ports]]
+localPort = 5173
+externalPort = 5173
+
+[[ports]]
+localPort = 5174
+externalPort = 3002
+
+[workflows]
+runButton = "Start Proxy Server"
+
+[[workflows.workflow]]
+name = "Start Proxy Server"
+author = 45848439
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node proxy-server.js"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "yarn dev"

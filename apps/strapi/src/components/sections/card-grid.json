@@ -1,0 +1,37 @@
+
+{
+  "collectionName": "components_sections_card_grids",
+  "info": {
+    "displayName": "CardGrid",
+    "description": "Grid of service cards with icons, titles and descriptions"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "utilities.service-card"
+    },
+    "columns": {
+      "type": "enumeration",
+      "enum": ["1", "2", "3", "4"],
+      "default": "3"
+    },
+    "backgroundColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "spacing": {
+      "type": "enumeration",
+      "enum": ["small", "medium", "large"],
+      "default": "medium"
+    }
+  }
+}

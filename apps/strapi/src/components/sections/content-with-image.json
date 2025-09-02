@@ -1,0 +1,48 @@
+
+{
+  "collectionName": "components_sections_content_with_images",
+  "info": {
+    "displayName": "ContentWithImage",
+    "description": "Section with content and image side by side"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "content": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.ck-editor-content"
+    },
+    "image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.basic-image"
+    },
+    "ctaButton": {
+      "type": "component",
+      "repeatable": false,
+      "component": "utilities.link"
+    },
+    "imagePosition": {
+      "type": "enumeration",
+      "enum": ["left", "right"],
+      "default": "right"
+    },
+    "backgroundColor": {
+      "type": "customField",
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+      "customField": "plugin::color-picker.color"
+    },
+    "verticalAlignment": {
+      "type": "enumeration",
+      "enum": ["top", "center", "bottom"],
+      "default": "center"
+    }
+  }
+}
