@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select"
 
 const localeTranslation = {
-  cs: "Czech",
+  it: "Italiano",
   en: "English",
 }
 

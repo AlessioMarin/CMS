@@ -1,4 +1,4 @@
-export const cs = {
+export const it = {
   Analytics: "Analytika",
   "Auth.components.Oops.text": "Váš účet byl pozastaven.",
   "Auth.components.Oops.text.admin":

@@ -14,7 +14,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   return {
     locale,
     messages: (
-      await (locale === "en"
+      await (locale === "it"
         ? // When using Turbopack, this will enable HMR for `en`
           import("../../locales/it.json")
         : import(`../../locales/${locale}.json`))

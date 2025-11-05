@@ -2,7 +2,7 @@ import { setPluginConfig } from "@_sh/strapi-plugin-ckeditor"
 
 import type { StrapiApp } from "@strapi/strapi/admin"
 
-import { cs } from "./cs"
+import { it } from "./it"
 
 import "@repo/design-system/styles.css"
 
@@ -11,9 +11,9 @@ import InternalJobsRunActions from "./extensions/InternalJobsRunActions"
 
 export default {
   config: {
-    locales: ["en", "cs"],
+    locales: ["en", "it"],
     translations: {
-      cs,
+      it,
     },
   },
   bootstrap(app: StrapiApp) {
