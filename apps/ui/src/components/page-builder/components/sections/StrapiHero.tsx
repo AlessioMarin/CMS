@@ -1,7 +1,7 @@
 import React from "react"
+import { Data } from "@repo/strapi"
 
-import type { TStrapiHero } from "@/types/api"
-
+import { removeThisWhenYouNeedMe } from "@/lib/general-helpers"
 import { AppLink } from "@/components/elementary/AppLink"
 import { Container } from "@/components/elementary/Container"
 import { ImageWithFallback } from "@/components/elementary/ImageWithFallback"
@@ -9,11 +9,12 @@ import { Heading } from "@/components/typography/Heading"
 import { Paragraph } from "@/components/typography/Paragraph"
 import { Button } from "@/components/ui/button"
 
-interface StrapiHeroProps {
-  data: TStrapiHero
-}
-
-const StrapiHero: React.FC<StrapiHeroProps> = ({ data }) => {
+export function StrapiHero({
+  component,
+}: {
+  readonly component: Data.Component<"sections.hero">
+}) {
+  removeThisWhenYouNeedMe("StrapiHero")
   const {
     title,
     subtitle,
@@ -23,16 +24,16 @@ const StrapiHero: React.FC<StrapiHeroProps> = ({ data }) => {
     backgroundColor,
     textColor,
     overlayOpacity,
-  } = data
+  } = component
 
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       {/* Background Image */}
-      {backgroundImage?.image && (
+      {backgroundImage?.media && (
         <div className="absolute inset-0 z-0">
           <ImageWithFallback
-            src={backgroundImage.image.url}
-            alt={backgroundImage.image.alternativeText || "Hero background"}
+            src={backgroundImage.media.url}
+            alt={backgroundImage.media.alternativeText || "Hero background"}
             fill
             className="object-cover"
             priority
@@ -46,7 +47,7 @@ const StrapiHero: React.FC<StrapiHeroProps> = ({ data }) => {
       )}
 
       {/* Background Color Fallback */}
-      {!backgroundImage?.image && (
+      {!backgroundImage?.media && (
         <div
           className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"
           style={{ backgroundColor: backgroundColor || "#1e293b" }}
@@ -58,7 +59,7 @@ const StrapiHero: React.FC<StrapiHeroProps> = ({ data }) => {
         <div className="space-y-8">
           {/* Title */}
           <Heading
-            variant="h1"
+            variant="heading1"
             className={`text-5xl font-bold tracking-tight md:text-7xl lg:text-8xl ${
               textColor === "dark" ? "text-slate-900" : "text-white"
             }`}
@@ -69,7 +70,7 @@ const StrapiHero: React.FC<StrapiHeroProps> = ({ data }) => {
           {/* Subtitle */}
           {subtitle && (
             <Heading
-              variant="h2"
+              variant="heading2"
               className={`text-xl font-light md:text-2xl lg:text-3xl ${
                 textColor === "dark" ? "text-slate-700" : "text-blue-100"
               }`}
@@ -93,8 +94,8 @@ const StrapiHero: React.FC<StrapiHeroProps> = ({ data }) => {
           {ctaButton && (
             <div className="pt-4">
               <AppLink
-                href={ctaButton.href}
-                openExternalInNewTab={ctaButton.newTab}
+                href={ctaButton?.href || "#"}
+                openExternalInNewTab={ctaButton?.newTab || false}
               >
                 <Button
                   size="lg"
@@ -117,5 +118,7 @@ const StrapiHero: React.FC<StrapiHeroProps> = ({ data }) => {
     </section>
   )
 }
+
+StrapiHero.displayName = "StrapiHero"
 
 export default StrapiHero

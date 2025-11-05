@@ -1,18 +1,19 @@
 import React from "react"
+import { Data } from "@repo/strapi"
 
-import type { TStrapiTeam } from "@/types/api"
-
+import { removeThisWhenYouNeedMe } from "@/lib/general-helpers"
 import { Container } from "@/components/elementary/Container"
 import { ImageWithFallback } from "@/components/elementary/ImageWithFallback"
 import { Heading } from "@/components/typography/Heading"
 import { Paragraph } from "@/components/typography/Paragraph"
 
-interface StrapiTeamProps {
-  data: TStrapiTeam
-}
-
-const StrapiTeam: React.FC<StrapiTeamProps> = ({ data }) => {
-  const { title, subtitle, members, backgroundColor } = data
+export function StrapiTeam({
+  component,
+}: {
+  readonly component: Data.Component<"sections.team">
+}) {
+  removeThisWhenYouNeedMe("StrapiTeam")
+  const { title, subtitle, members, backgroundColor } = component
 
   return (
     <section
@@ -25,7 +26,7 @@ const StrapiTeam: React.FC<StrapiTeamProps> = ({ data }) => {
           <div className="mb-16 text-center">
             {title && (
               <Heading
-                variant="h2"
+                variant="heading2"
                 className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl"
               >
                 {title}
@@ -46,13 +47,15 @@ const StrapiTeam: React.FC<StrapiTeamProps> = ({ data }) => {
               <div key={index} className="group text-center">
                 <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                   {/* Photo */}
-                  {member.photo?.url && (
+                  {member.photo?.media?.url && (
                     <div className="relative mb-6">
                       <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-blue-400 to-blue-600 p-1">
                         <div className="h-full w-full overflow-hidden rounded-full">
                           <ImageWithFallback
-                            src={member.photo.url}
-                            alt={member.photo.alternativeText || member.name}
+                            src={member.photo.media.url}
+                            alt={
+                              member.photo.media.alternativeText || member.name
+                            }
                             width={88}
                             height={88}
                             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
@@ -64,16 +67,16 @@ const StrapiTeam: React.FC<StrapiTeamProps> = ({ data }) => {
 
                   {/* Name */}
                   <Heading
-                    variant="h3"
+                    variant="heading3"
                     className="mb-2 text-xl font-semibold text-slate-900 transition-colors duration-300 group-hover:text-blue-700"
                   >
                     {member.name}
                   </Heading>
 
-                  {/* Role */}
-                  {member.role && (
+                  {/* Position */}
+                  {member.position && (
                     <Paragraph className="mb-3 font-medium text-blue-600">
-                      {member.role}
+                      {member.position}
                     </Paragraph>
                   )}
 
@@ -93,4 +96,5 @@ const StrapiTeam: React.FC<StrapiTeamProps> = ({ data }) => {
   )
 }
 
+StrapiTeam.displayName = "StrapiTeam"
 export default StrapiTeam

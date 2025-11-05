@@ -1,119 +1,87 @@
-"use client"
+import Image from "next/image"
+import { Data } from "@repo/strapi"
+import { getTranslations } from "next-intl/server"
 
-import React, { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { AppLocale } from "@/types/general"
 
-import type { TStrapiNavbar } from "@/types/api"
+import { getAuth } from "@/lib/auth"
+import { fetchNavbar } from "@/lib/strapi-api/content/server"
+import { cn } from "@/lib/styles"
+import AppLink from "@/components/elementary/AppLink"
+import LocaleSwitcher from "@/components/elementary/LocaleSwitcher"
+import StrapiImageWithLink from "@/components/page-builder/components/utilities/StrapiImageWithLink"
+import StrapiLink from "@/components/page-builder/components/utilities/StrapiLink"
+import { LoggedUserMenu } from "@/components/page-builder/single-types/navbar/LoggedUserMenu"
 
-import { AppLink } from "@/components/elementary/AppLink"
-import { Container } from "@/components/elementary/Container"
-import { ImageWithFallback } from "@/components/elementary/ImageWithFallback"
-import { Button } from "@/components/ui/button"
+const hardcodedLinks: NonNullable<
+  Data.ContentType<"api::navbar.navbar">["links"]
+> = [{ id: "client-page", href: "/client-page", label: "Client Page" }]
 
-interface StrapiNavbarProps {
-  data: TStrapiNavbar | null
-}
+export async function StrapiNavbar({ locale }: { readonly locale: AppLocale }) {
+  const response = await fetchNavbar(locale)
+  const navbar = response?.data
 
-const StrapiNavbar: React.FC<StrapiNavbarProps> = ({ data }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  if (!data) {
-    return (
-      <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-slate-900/95 backdrop-blur-sm">
-        <Container>
-          <div className="flex h-16 items-center justify-between">
-            <div className="text-xl font-bold text-white">
-              Atlantic Partners
-            </div>
-          </div>
-        </Container>
-      </nav>
-    )
+  if (navbar == null) {
+    return null
   }
 
-  const { links, logoImage } = data
+  const t = await getTranslations("navbar")
+
+  const links = (navbar.links ?? [])
+    .filter((link) => link.href)
+    .concat(...hardcodedLinks)
+
+  const session = await getAuth()
 
   return (
-    <nav className="fixed top-0 right-0 left-0 z-50 border-b border-slate-800 bg-slate-900/95 backdrop-blur-sm">
-      <Container>
-        <div className="flex h-16 items-center justify-between md:h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            {logoImage?.image?.url ? (
-              <AppLink
-                href={logoImage.link?.href || "/"}
-                newTab={logoImage.link?.newTab}
-              >
-                <div className="flex items-center space-x-3">
-                  <ImageWithFallback
-                    src={logoImage.image.url}
-                    alt={logoImage.image.alternativeText || "Atlantic Partners"}
-                    width={logoImage.image.width || 150}
-                    height={logoImage.image.height || 40}
-                    className="h-8 w-auto brightness-0 invert filter md:h-10"
-                  />
-                </div>
-              </AppLink>
-            ) : (
-              <AppLink
-                href="/"
-                className="text-xl font-bold text-white md:text-2xl"
-              >
-                Atlantic Partners
-              </AppLink>
-            )}
-          </div>
-
-          {/* Desktop Menu */}
-          {links && links.length > 0 && (
-            <div className="hidden items-center space-x-8 md:flex">
-              {links.map((link, index) => (
-                <AppLink
-                  key={index}
-                  href={link.href}
-                  newTab={link.newTab}
-                  className="font-medium text-slate-200 underline-offset-4 transition-colors duration-200 hover:text-white hover:underline"
-                >
-                  {link.label}
-                </AppLink>
-              ))}
-            </div>
+    <header className="sticky top-0 z-40 w-full border-b bg-white/90 shadow-sm backdrop-blur transition-colors duration-300">
+      <div className="flex h-16 items-center space-x-6 px-6 sm:space-x-0">
+        <div className="flex gap-6 md:gap-10">
+          {navbar.logoImage ? (
+            <StrapiImageWithLink
+              component={navbar.logoImage}
+              linkProps={{ className: "flex items-center space-x-2" }}
+              imageProps={{
+                forcedSizes: { width: 90, height: 60 },
+                hideWhenMissing: true,
+              }}
+            />
+          ) : (
+            <AppLink href="/" className="text-xl font-bold">
+              <Image src="/images/logo.svg" alt="logo" height={23} width={82} />
+            </AppLink>
           )}
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:bg-slate-800 hover:text-slate-200"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
-          </div>
+          {links.length > 0 ? (
+            <nav className="flex">
+              {links.map((link) => (
+                <StrapiLink
+                  component={link}
+                  key={link.href}
+                  className={cn(
+                    "flex items-center text-sm font-medium hover:text-red-600"
+                  )}
+                />
+              ))}
+            </nav>
+          ) : null}
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && links && links.length > 0 && (
-          <div className="border-t border-slate-800 bg-slate-900/98 backdrop-blur-sm md:hidden">
-            <div className="space-y-4 py-4">
-              {links.map((link, index) => (
-                <AppLink
-                  key={index}
-                  href={link.href}
-                  newTab={link.newTab}
-                  className="block rounded px-4 py-2 font-medium text-slate-200 transition-colors duration-200 hover:bg-slate-800/50 hover:text-white"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </AppLink>
-              ))}
-            </div>
-          </div>
-        )}
-      </Container>
-    </nav>
+        <div className="hidden flex-1 items-center justify-end space-x-4 lg:flex">
+          {session?.user ? (
+            <nav className="flex items-center space-x-1">
+              <LoggedUserMenu user={session.user} />
+            </nav>
+          ) : (
+            <AppLink href="/auth/signin">{t("actions.signIn")}</AppLink>
+          )}
+          <LocaleSwitcher locale={locale} />
+        </div>
+      </div>
+    </header>
   )
 }
+
+StrapiNavbar.displayName = "StrapiNavbar"
 
 export default StrapiNavbar

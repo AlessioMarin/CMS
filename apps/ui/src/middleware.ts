@@ -41,12 +41,6 @@ export default function middleware(req: NextRequest) {
     )
   }
 
-  // Reverse proxy for /admin routes to Strapi
-  if (req.nextUrl.pathname.startsWith("/admin")) {
-    const strapiUrl = `http://0.0.0.0:1337${req.nextUrl.pathname}${req.nextUrl.search}`
-    return NextResponse.rewrite(strapiUrl)
-  }
-
   // Build regex for auth (non-public) pages
   const authPathnameRegex = RegExp(
     `^(/(${routing.locales.join("|")}))?(${authPages.join("|")})/?$`,
@@ -71,8 +65,6 @@ export const config = {
     // Set a cookie to remember the previous locale for
     // all requests that have a locale prefix
     `/(cs|en)/:path*`,
-    // Include /admin routes for reverse proxy
-    "/admin/:path*",
 
     // Skip all paths that should not be internationalized
     "/((?!_next|_vercel|api|robots.txt|favicon.ico|sitemap|.*\\..*).*)",

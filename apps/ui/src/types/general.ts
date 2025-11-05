@@ -5,7 +5,7 @@ import { routing } from "@/lib/navigation"
 import { IntlKeysPath } from "./helpers"
 
 // Use type safe message keys with `next-intl`
-type Messages = typeof import("../../locales/it.json")
+type Messages = typeof import("../../locales/en.json")
 
 // eslint-disable-next-line no-unused-vars
 export interface IntlMessages extends Messages {}

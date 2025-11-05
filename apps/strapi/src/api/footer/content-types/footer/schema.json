@@ -1,4 +1,3 @@
-
 {
   "kind": "singleType",
   "collectionName": "footers",
@@ -43,7 +42,17 @@
           "localized": true
         }
       },
-      "component": "utilities.links-with-title"
+      "component": "elements.footer-item"
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "utilities.link"
     },
     "contactInfo": {
       "type": "component",

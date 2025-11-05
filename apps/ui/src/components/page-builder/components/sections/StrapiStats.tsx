@@ -1,17 +1,18 @@
 import React from "react"
+import { Data } from "@repo/strapi"
 
-import type { TStrapiStats } from "@/types/api"
-
+import { removeThisWhenYouNeedMe } from "@/lib/general-helpers"
 import { Container } from "@/components/elementary/Container"
 import { Heading } from "@/components/typography/Heading"
 import { Paragraph } from "@/components/typography/Paragraph"
 
-interface StrapiStatsProps {
-  data: TStrapiStats
-}
-
-const StrapiStats: React.FC<StrapiStatsProps> = ({ data }) => {
-  const { title, subtitle, stats, backgroundColor } = data
+export function StrapiStats({
+  component,
+}: {
+  readonly component: Data.Component<"sections.stats">
+}) {
+  removeThisWhenYouNeedMe("StrapiStats")
+  const { title, subtitle, stats, backgroundColor } = component
 
   return (
     <section
@@ -24,7 +25,7 @@ const StrapiStats: React.FC<StrapiStatsProps> = ({ data }) => {
           <div className="mb-16 text-center">
             {title && (
               <Heading
-                variant="h2"
+                variant="heading2"
                 className="mb-6 text-4xl font-bold text-white md:text-5xl"
               >
                 {title}
@@ -46,7 +47,7 @@ const StrapiStats: React.FC<StrapiStatsProps> = ({ data }) => {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:bg-white/10">
                   {/* Value */}
                   <div className="mb-2 text-4xl font-bold text-blue-400 transition-colors duration-300 group-hover:text-blue-300 md:text-5xl">
-                    {stat.value}
+                    {stat.number}
                   </div>
 
                   {/* Label */}
@@ -54,10 +55,10 @@ const StrapiStats: React.FC<StrapiStatsProps> = ({ data }) => {
                     {stat.label}
                   </Paragraph>
 
-                  {/* Description */}
-                  {stat.description && (
+                  {/* Suffix */}
+                  {stat.suffix && (
                     <Paragraph className="mt-3 text-sm text-slate-400">
-                      {stat.description}
+                      {stat.suffix}
                     </Paragraph>
                   )}
                 </div>
@@ -70,4 +71,5 @@ const StrapiStats: React.FC<StrapiStatsProps> = ({ data }) => {
   )
 }
 
+StrapiStats.displayName = "StrapiStats"
 export default StrapiStats

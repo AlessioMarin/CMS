@@ -1,19 +1,25 @@
 import React from "react"
+import { Data } from "@repo/strapi"
 
 import type { TStrapiCardGrid } from "@/types/api"
 
+import { removeThisWhenYouNeedMe } from "@/lib/general-helpers"
+import { AppLink } from "@/components/elementary/AppLink"
 import { Container } from "@/components/elementary/Container"
 import { ImageWithFallback } from "@/components/elementary/ImageWithFallback"
+import { StrapiBasicImage } from "@/components/page-builder/components/utilities/StrapiBasicImage"
 import { Heading } from "@/components/typography/Heading"
 import { Paragraph } from "@/components/typography/Paragraph"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
-interface StrapiCardGridProps {
-  data: TStrapiCardGrid
-}
-
-const StrapiCardGrid: React.FC<StrapiCardGridProps> = ({ data }) => {
-  const { title, subtitle, cards, columns, backgroundColor } = data
+export function StrapiCardGrid({
+  component,
+}: {
+  readonly component: Data.Component<"sections.card-grid">
+}) {
+  removeThisWhenYouNeedMe("StrapiCardGrid")
+  const { title, subtitle, cards, columns, backgroundColor } = component
 
   const gridCols = {
     "1": "grid-cols-1",
@@ -33,7 +39,7 @@ const StrapiCardGrid: React.FC<StrapiCardGridProps> = ({ data }) => {
           <div className="mb-16 text-center">
             {title && (
               <Heading
-                variant="h2"
+                variant="heading2"
                 className="mb-6 text-4xl font-bold text-slate-900 md:text-5xl"
               >
                 {title}
@@ -57,23 +63,19 @@ const StrapiCardGrid: React.FC<StrapiCardGridProps> = ({ data }) => {
               >
                 <CardContent className="p-8 text-center">
                   {/* Icon */}
-                  {card.icon?.url && (
-                    <div className="mb-6 flex justify-center">
-                      <div className="h-16 w-16 rounded-full bg-blue-50 p-3 transition-colors duration-300 group-hover:bg-blue-100">
-                        <ImageWithFallback
-                          src={card.icon.url}
-                          alt={card.icon.alternativeText || card.title}
-                          width={40}
-                          height={40}
-                          className="h-full w-full object-contain filter transition-transform duration-300 group-hover:scale-110"
-                        />
-                      </div>
-                    </div>
-                  )}
+                  <div className="grayscale">
+                    <StrapiBasicImage
+                      component={card.icon}
+                      forcedSizes={{ width: 200 }}
+                      priority={index < 10}
+                      loading="eager"
+                      className="z-10 max-h-10 w-full object-contain"
+                    />
+                  </div>
 
                   {/* Title */}
                   <Heading
-                    variant="h3"
+                    variant="heading3"
                     className="mb-4 text-xl font-semibold text-slate-900 transition-colors duration-300 group-hover:text-blue-700 md:text-2xl"
                   >
                     {card.title}
@@ -85,6 +87,23 @@ const StrapiCardGrid: React.FC<StrapiCardGridProps> = ({ data }) => {
                       {card.description}
                     </Paragraph>
                   )}
+
+                  {/* CTA Button */}
+                  {card.ctaButton && (
+                    <div className="pt-4">
+                      <AppLink
+                        href={card.ctaButton?.href || "#"}
+                        openExternalInNewTab={card.ctaButton?.newTab || false}
+                      >
+                        <Button
+                          size="lg"
+                          className="transform rounded-full bg-blue-600 px-8 py-4 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-xl"
+                        >
+                          {card.ctaButton.label}
+                        </Button>
+                      </AppLink>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -94,5 +113,7 @@ const StrapiCardGrid: React.FC<StrapiCardGridProps> = ({ data }) => {
     </section>
   )
 }
+
+StrapiCardGrid.displayName = "StrapiCardGrid"
 
 export default StrapiCardGrid

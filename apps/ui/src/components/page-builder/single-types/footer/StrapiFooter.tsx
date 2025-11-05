@@ -1,147 +1,93 @@
-import React from "react"
+import { Fragment } from "react"
 
-import type { TStrapiFooter } from "@/types/api"
+import { AppLocale } from "@/types/general"
 
-import { AppLink } from "@/components/elementary/AppLink"
+import { fetchFooter } from "@/lib/strapi-api/content/server"
+import { cn } from "@/lib/styles"
 import { Container } from "@/components/elementary/Container"
-import { ImageWithFallback } from "@/components/elementary/ImageWithFallback"
-import { Heading } from "@/components/typography/Heading"
-import { Paragraph } from "@/components/typography/Paragraph"
+import StrapiImageWithLink from "@/components/page-builder/components/utilities/StrapiImageWithLink"
+import StrapiLink from "@/components/page-builder/components/utilities/StrapiLink"
 
-interface StrapiFooterProps {
-  data: TStrapiFooter | null
-}
+export async function StrapiFooter({ locale }: { readonly locale: AppLocale }) {
+  const response = await fetchFooter(locale)
+  const component = response?.data
 
-const StrapiFooter: React.FC<StrapiFooterProps> = ({ data }) => {
-  if (!data) {
-    return (
-      <footer className="bg-slate-900 py-12 text-white">
-        <Container>
-          <div className="text-center">
-            <Paragraph className="text-slate-400">
-              © 2024 Atlantic Partners. All rights reserved.
-            </Paragraph>
-          </div>
-        </Container>
-      </footer>
-    )
+  if (component == null) {
+    return null
   }
 
-  const { sections, links, logoImage, copyRight } = data
-
   return (
-    <footer className="bg-slate-900 text-white">
-      <Container>
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 py-16 md:grid-cols-2 lg:grid-cols-4">
-          {/* Logo Section */}
-          <div className="lg:col-span-1">
-            {logoImage?.image?.url ? (
-              <AppLink
-                href={logoImage.link?.href || "/"}
-                newTab={logoImage.link?.newTab}
-              >
-                <ImageWithFallback
-                  src={logoImage.image.url}
-                  alt={logoImage.image.alternativeText || "Atlantic Partners"}
-                  width={logoImage.image.width || 180}
-                  height={logoImage.image.height || 50}
-                  className="mb-6 h-12 w-auto brightness-0 invert filter"
-                />
-              </AppLink>
-            ) : (
-              <Heading variant="h3" className="mb-6 text-2xl font-bold">
-                Atlantic Partners
-              </Heading>
-            )}
-
-            <Paragraph className="leading-relaxed text-slate-400">
-              Your trusted partner for innovative solutions and exceptional
-              service.
-            </Paragraph>
+    <div
+      className="w-full border-t bg-white/10 shadow-sm backdrop-blur transition-colors duration-300"
+      style={{
+        backgroundColor: component.backgroundColor
+          ? component.backgroundColor
+          : "rgba(255, 255, 255, 0.8)",
+      }}
+    >
+      <Container className="pt-8 pb-4">
+        <div className="grid grid-cols-1 gap-6 pb-4 sm:grid-cols-[30%_1fr]">
+          <div className="flex flex-col space-y-4">
+            <StrapiImageWithLink
+              component={component.logoImage}
+              imageProps={{ hideWhenMissing: true }}
+            />
           </div>
 
-          {/* Footer Sections */}
-          {sections &&
-            sections.map((section, index) => (
-              <div key={index} className="space-y-4">
-                <Heading
-                  variant="h4"
-                  className="mb-4 text-lg font-semibold text-white"
-                >
-                  {section.title}
-                </Heading>
-                {section.links && section.links.length > 0 && (
-                  <ul className="space-y-3">
-                    {section.links.map((link, linkIndex) => (
-                      <li key={linkIndex}>
-                        <AppLink
-                          href={link.href}
-                          newTab={link.newTab}
-                          className="text-slate-400 underline-offset-4 transition-colors duration-200 hover:text-white hover:underline"
-                        >
-                          {link.label}
-                        </AppLink>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+          <div className={cn("grid gap-8")}>
+            {component.sections?.map((section) => (
+              <div className="flex flex-col" key={section.id}>
+                <h3 className="pb-2 text-lg font-bold">{section.title}</h3>
+
+                {section.links?.map((link, i) => (
+                  <StrapiLink
+                    key={String(link.id) + i}
+                    component={link}
+                    className="text-primary w-fit text-sm hover:underline"
+                  />
+                ))}
               </div>
             ))}
-
-          {/* Additional Links */}
-          {links && links.length > 0 && (
-            <div className="space-y-4">
-              <Heading
-                variant="h4"
-                className="mb-4 text-lg font-semibold text-white"
-              >
-                Quick Links
-              </Heading>
-              <ul className="space-y-3">
-                {links.map((link, index) => (
-                  <li key={index}>
-                    <AppLink
-                      href={link.href}
-                      newTab={link.newTab}
-                      className="text-slate-400 underline-offset-4 transition-colors duration-200 hover:text-white hover:underline"
-                    >
-                      {link.label}
-                    </AppLink>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-slate-800 py-8">
-          <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-            <Paragraph className="text-sm text-slate-400">
-              {copyRight ||
-                `© ${new Date().getFullYear()} Atlantic Partners. All rights reserved.`}
-            </Paragraph>
+        <div className="flex items-center justify-between">
+          <div>
+            {component.copyRight && (
+              <p className="">
+                {component.copyRight.replace(
+                  "{YEAR}",
+                  new Date().getFullYear().toString()
+                )}
+              </p>
+            )}
+          </div>
 
-            <div className="flex space-x-6">
-              <AppLink
-                href="/privacy"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-white"
-              >
-                Privacy Policy
-              </AppLink>
-              <AppLink
-                href="/terms"
-                className="text-sm text-slate-400 transition-colors duration-200 hover:text-white"
-              >
-                Terms of Service
-              </AppLink>
-            </div>
+          <div className="flex flex-col items-end sm:flex-row sm:items-center sm:space-x-4">
+            {component.links?.map((link, i) => (
+              <Fragment key={String(link.id) + i}>
+                <StrapiLink
+                  component={link}
+                  className="text-primary relative w-fit text-sm hover:underline"
+                />
+
+                {i < component.links!.length - 1 && (
+                  <span
+                    key={link.id + "_dot"}
+                    className="mx-2 hidden pt-0.5 sm:inline-block"
+                  >
+                    •
+                  </span>
+                )}
+              </Fragment>
+            ))}
           </div>
         </div>
       </Container>
-    </footer>
+    </div>
   )
 }
+
+StrapiFooter.displayName = "StrapiFooter"
 
 export default StrapiFooter

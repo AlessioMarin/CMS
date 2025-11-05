@@ -405,6 +405,12 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime
     createdBy: Schema.Attribute.Relation<"oneToOne", "admin::user"> &
       Schema.Attribute.Private
+    links: Schema.Attribute.Component<"utilities.link", true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true
+        }
+      }>
     locale: Schema.Attribute.String
     localizations: Schema.Attribute.Relation<"oneToMany", "api::footer.footer">
     logoImage: Schema.Attribute.Component<"utilities.image-with-link", false> &
@@ -414,7 +420,7 @@ export interface ApiFooterFooter extends Struct.SingleTypeSchema {
         }
       }>
     publishedAt: Schema.Attribute.DateTime
-    sections: Schema.Attribute.Component<"utilities.links-with-title", true> &
+    sections: Schema.Attribute.Component<"elements.footer-item", true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true
